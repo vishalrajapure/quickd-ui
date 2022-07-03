@@ -1,0 +1,38 @@
+<div class="text-center">
+  <main class="form-signin">
+    <form [formGroup]="loginForm" >
+      <img class="mb-4" src="../../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal"> Sign In</h1>
+
+      <div class="form-group form-floating">
+        <input type="email" class="form-control" id="floatingInput" formControlName="contactNo" placeholder="name@example.com">
+        <label for="floatingInput">contact number</label>
+      </div>
+      <div *ngIf="loginForm.controls['contactNo'].invalid && loginForm.controls['contactNo'].touched" class="alert alert-danger">
+        Contact number is required.
+      </div>
+      <div class="mt-3 form-group form-floating">
+        <input type="password" class="form-control" id="floatingPassword" formControlName="password" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" class="alert alert-danger">
+        Password is required.
+      </div>
+
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button [disabled]="!loginForm.valid" class="w-100 btn btn-lg btn-primary"
+      (click)="login()" type="submit">Sign in</button>
+      <div *ngIf="!loginResponse.success" class="alert alert-danger" style="margin-top: 16px;width: auto;">
+        <strong>Login Failed! </strong>{{errorMsg}}
+      </div>
+      <hr class="my-4">
+      <p class=" mb-3 text-muted">Don't have an account? <a href="/signup"><strong> Sign Up</strong></a></p>
+
+    </form>
+  </main>
+</div>
+

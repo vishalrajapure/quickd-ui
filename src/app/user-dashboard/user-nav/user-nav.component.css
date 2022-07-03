@@ -1,0 +1,51 @@
+
+.navbarmenucolor{
+  color: rgba(24, 2, 2, 0.5);
+  font-weight: 500;
+}
+
+.navmenuliststyle{
+border-bottom: 1px solid rgba(0,0,0,.12);
+padding: .4rem 0.5rem;
+}
+
+/* .navbarmenucolor:hover{
+color: orange;
+cursor: pointer;
+} */
+
+.navmenuliststyle:hover{
+background-color: #0d6efd(0,0,0,.12);
+cursor: pointer;
+}
+
+.zoom {
+transition: transform .2s;
+}
+.zoom:hover{
+transform: scale(1.08);
+background-color: #0d6efd;
+}
+
+.list-group-item {
+border: none;
+}
+
+/* .active{
+color: orange;
+} */
+
+
+.inputtextclass:hover{
+  border-color: black;
+  border-width: 0.8mm;
+  }
+
+.form-control:hover{
+  border-color: black;
+  border-width: 0.8mm;
+}
+
+#navbarTogglerDemo02{
+  z-index: 100;
+}

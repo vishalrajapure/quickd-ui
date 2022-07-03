@@ -1,0 +1,205 @@
+<div class="content">
+  <div *ngIf="!displayDealsFlag" class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Pick a Parcel</h4>
+    <form [formGroup]="searchDealForm" class="needs-validation">
+      <div class="row g-3" formGroupName="currentLocation">
+        <div class="col-12">
+          <label for="address" class="form-label">Enter your current location</label>
+          <input type="text" class="form-control" id="address" formControlName="street" placeholder="street" value="">
+          <div
+            *ngIf="searchDealForm.get('currentLocation')!.get('street')!.touched && searchDealForm.get('currentLocation')!.get('street')!.invalid"
+            class="alert alert-danger">
+            Street should be valid.
+          </div>
+        </div>
+
+        <div class="col-md-5">
+
+          <input type="text" class="form-control" id="city" formControlName="city" placeholder="City">
+          <div
+            *ngIf="searchDealForm.get('currentLocation')!.get('city')!.touched && searchDealForm.get('currentLocation')!.get('city')!.invalid"
+            class="alert alert-danger">
+            City should be valid.
+          </div>
+        </div>
+
+        <div class="col-md-4">
+
+          <input type="text" class="form-control" id="District" formControlName="district" placeholder="District">
+          <div
+            *ngIf="searchDealForm.get('currentLocation')!.get('district')!.touched && searchDealForm.get('currentLocation')!.get('district')!.invalid"
+            class="alert alert-danger">
+            District should be valid.
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="zip" formControlName="pinCode" placeholder="Pin Code">
+          <div
+            *ngIf="searchDealForm.get('currentLocation')!.get('pinCode')!.touched && searchDealForm.get('currentLocation')!.get('pinCode')!.invalid"
+            class="alert alert-danger">
+            Pin code should be valid.
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row g-3">
+        <div class="col-12 pt-2">
+          <label for="contactNo" class="form-label">Contact Number</label>
+          <div class="input-group has-validation">
+            <input type="text" class="form-control" id="contactNo" formControlName="carrierContactNumber"
+              placeholder="contact number">
+            <div *ngIf="searchDealForm.get('carrierContactNumber')!.touched && searchDealForm.get('carrierContactNumber')!.invalid"
+              class="alert alert-danger">
+              Contact number should be valid.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-1 mb-1">
+        <div class="col-md-4">
+          <button type="button" class="btn btn-warning">Verify Mobile No.</button>
+        </div>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="District" placeholder="OTP">
+        </div>
+
+        <div class="col-md-4">
+          <button type="button" class="btn btn-success">Verify</button>
+        </div>
+      </div>
+
+      <div class="row g-3 pt-2" formGroupName="destination">
+        <div class="col-12">
+          <label for="address" class="form-label">Destination you are visiting</label>
+          <input type="text" class="form-control" id="address" formControlName="street" placeholder="street">
+          <div
+            *ngIf="searchDealForm.get('destination')!.get('street')!.touched && searchDealForm.get('destination')!.get('street')!.invalid"
+            class="alert alert-danger">
+            Street should be valid.
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <input type="text" class="form-control" id="city" formControlName="city" placeholder="City">
+          <div
+            *ngIf="searchDealForm.get('destination')!.get('city')!.touched && searchDealForm.get('destination')!.get('city')!.invalid"
+            class="alert alert-danger">
+            City should be valid.
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="District" formControlName="district" placeholder="District">
+          <div
+            *ngIf="searchDealForm.get('destination')!.get('district')!.touched && searchDealForm.get('destination')!.get('district')!.invalid"
+            class="alert alert-danger">
+            District should be valid.
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="zip" formControlName="pinCode" placeholder="Pin Code">
+          <div
+            *ngIf="searchDealForm.get('destination')!.get('pinCode')!.touched && searchDealForm.get('destination')!.get('pinCode')!.invalid"
+            class="alert alert-danger">
+            Pin code should be valid.
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row d-flex justify-content-evenly pt-5 pb-5">
+        <button type="button" class="btn btn-dark btn-lg" (click)="searchDeals()">Check For Deals</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div *ngIf="displayDealsFlag && !selectedDeal && AVAILABLE_DEAL_LIST" class="row">
+    <h2 class="ml-3">Available parcels to pick up</h2>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-4" style="padding-top: 0px;">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead style="background-color: lightgray;">
+                <tr>
+                  <th>Sr.No</th>
+                  <th (click)="sort('senderFirstName')">Sender Name&nbsp;<i class="fa fa-sort"></i></th>
+                  <th>Pickup Location</th>
+                  <th>Drop Location</th>
+                  <th>Contact No.</th>
+                  <th (click)="sort('dealTotal')">Deal Total Date&nbsp;<i class="fa fa-sort"></i></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let deal of AVAILABLE_DEAL_LIST | paginate: config;  let i=index">
+                  <td>{{i+1}}</td>
+                  <td>
+                    <img _ngcontent-jol-c118="" src="../../../assets/img/card-image-1.jpg" width="40" height="40"
+                      class="mr-3 rounded-circle img-thumbnail p-0 shadow-sm">
+                    {{deal!.sender!.senderFirstName + ' ' + deal!.sender!.senderLastName}}
+                  </td>
+                  <td> {{deal!.pickUpLocation!.city}}<br></td>
+                  <td> {{deal!.dropLocation!.city}}</td>
+                  <td> {{deal!.sender!.senderContactNo}}</td>
+                  <td> {{deal?.dealTotal || 100}}</td>
+                  <td> <label>
+                      <button type="button" (click)="checkDeal(deal)" class="btn btn-dark">Check The Deal
+                      </button>
+                    </label></td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="selectedDeal" class="card">
+    <h5 class="card-header">Sender Name : {{selectedDeal!.sender!.senderFirstName + ' ' + selectedDeal!.sender!.senderLastName}}</h5>
+    <div class="card-body">
+
+      <h5 class="card-title">Pick up location</h5>
+      <p class="card-text">{{selectedDeal!.pickUpLocation!.street + ' ' + selectedDeal!.pickUpLocation!.city + ' '
+        + selectedDeal!.pickUpLocation!.district + ' ' + selectedDeal!.pickUpLocation!.pinCode}}</p>
+
+
+      <h5 class="card-title">Drop location</h5>
+      <p class="card-text">{{selectedDeal!.dropLocation!.street + ' ' + selectedDeal!.dropLocation!.city + ' '
+        + selectedDeal!.dropLocation!.district + ' ' + selectedDeal!.dropLocation!.pinCode}}</p>
+
+      <h5 class="card-title">Parcel Approx. Weight</h5>
+      <p class="card-text">{{selectedDeal!.parcel!.parcelWeight}} Kg</p>
+
+      <h5 class="card-title">Parcel Approx. Length</h5>
+      <p class="card-text">{{selectedDeal!.parcel!.parcelLength}} cms</p>
+
+      <h5 class="card-title">Sender Contact Number</h5>
+      <p class="card-text">{{selectedDeal!.sender!.senderContactNo}}</p>
+
+       <div class="d-flex flex-row d-flex justify-content-evenly">
+        <button type="button" class="btn btn-danger" (click)="selectedDeal=null;">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="requestForConfirmation()">Request sender to confirm</button>
+      </div>
+    </div>
+  </div>
+
+
+  <template id="submitCheckDealForm">
+    <swal-title>
+     Please submit required details before checking the deals
+    </swal-title>
+    <swal-icon type="warning" color="red"></swal-icon>
+    <swal-button type="confirm">
+     Ok
+    </swal-button>
+  </template>
+</div>

@@ -1,0 +1,63 @@
+<body class="bg-light">
+
+  <div class="container">
+    <main>
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <h2>Sign up</h2>
+      </div>
+
+      <!-- <div class="row g-5"> -->
+
+        <div class="col-md-6 form-center">
+          <form [formGroup]="signupForm" class="needs-validation" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">First name</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+                <!-- <label *ngIf="signupForm.get('firstName').touched && signupForm.get('firstName').invalid"
+                  [ngClass]="'text-danger'"> License Number is required</label> -->
+              </div>
+
+              <div class="col-sm-6">
+                <label for="lastName" class="form-label">Last name</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName"  placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="contactNumber" class="form-label">Contact Number</label>
+                <div class="input-group has-validation">
+                  <!-- <span class="input-group-text">@</span> -->
+                  <input type="text" class="form-control" id="contactNumber" formControlName="contactNo" placeholder="contact number" required>
+                  <div class="invalid-feedback">
+                    contactNumber is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="password" class="form-label">Password <span class="text-muted"></span></label>
+                <input type="password" class="form-control" id="password" formControlName="password" placeholder="enter your password here">
+                <div class="invalid-feedback">
+                  Password is not valid
+                </div>
+              </div>
+
+            </div>
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg" (click)="signUp()" type="submit">Sign Up</button>
+          </form>
+        </div>
+      <!-- </div> -->
+    </main>
+  </div>
+
+
+  <script src="../../assets/js/form-validation.js"></script>
+</body>
