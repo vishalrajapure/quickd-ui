@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { AccceptDealRequest } from '../models/AcceptDealRequest';
 import { Deal } from '../models/Deal';
 import { CommonRestService } from '../shared-services/common-rest.service';
 
@@ -22,7 +21,7 @@ export class UserDashboardService {
     return this.commonRestService.postMethod(environment.BASE_PATH + 'deals/searchDeals', searchDealsRequest);
   }
 
-  public requestForConfirmation(acceptDealRequest:AccceptDealRequest) {
-    return this.commonRestService.postMethod(environment.BASE_PATH + 'deals/requestForConfirmation', acceptDealRequest);
+  public requestForConfirmation(confirmDealRequest:Deal) {
+    return this.commonRestService.postMethod(environment.BASE_PATH + 'deals/requestForConfirmation', confirmDealRequest);
   }
 }

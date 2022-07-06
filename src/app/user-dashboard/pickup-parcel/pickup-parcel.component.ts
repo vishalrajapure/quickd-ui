@@ -1,4 +1,3 @@
-import { AccceptDealRequest } from './../../models/AcceptDealRequest';
 import { Carrier } from './../../models/Carrier';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -21,7 +20,6 @@ export class PickupParcelComponent implements OnInit {
   public config: any;
   public searchString: any;
   public selectedDeal: Deal | null = null;
-  public acceptDealRequest !: AccceptDealRequest;
 
   constructor(
     private userDashboardService: UserDashboardService,
@@ -155,22 +153,18 @@ export class PickupParcelComponent implements OnInit {
   }
 
   public requestForConfirmation() {
-    const carrierContactNumber = this.searchDealForm!.get('carrierContactNumber')!.value;
-    const loggedInUserContactNumber = sessionStorage!.getItem('username');
-    if (carrierContactNumber && loggedInUserContactNumber && this.selectedDeal ) {
+    const carrierContactNumber =  sessionStorage!.getItem('username');
+    if (carrierContactNumber && this.selectedDeal ) {
         let carrier = new Carrier();
         carrier.carrierContactNo = carrierContactNumber;
         this.selectedDeal!.carrier = carrier;
-        this.acceptDealRequest = new AccceptDealRequest();
-        this.acceptDealRequest.selectedDeal = this.selectedDeal;
-        this.acceptDealRequest.loggedInUserContactNumber = loggedInUserContactNumber
     } else {
       Swal.fire('Carrier contact number is required', 'error');
       return;
     }
     this.spinnerService.show();
     const acceptDealSub$ = this.userDashboardService
-      .requestForConfirmation(this.acceptDealRequest)
+      .requestForConfirmation(this.selectedDeal)
       .subscribe(
         (resp) => {
           this.spinnerService.hide();
